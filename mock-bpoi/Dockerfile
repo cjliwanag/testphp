@@ -31,7 +31,7 @@ RUN package-cleanup --dupes && \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
 
-COPY etc /etc/
+COPY ./etc /etc/
 
 RUN mkdir /etc/httpd/sites-available && \
     mkdir /etc/httpd/sites-enabled
