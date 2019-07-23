@@ -80,7 +80,7 @@ WORKDIR /var/www/html
 #ADD ./.local.env /var/www/html/.env
 
 # Install and update laravel (rebuild into vendor folder)
-RUN composer install
+#RUN composer install
 #RUN composer update
 
 RUN mkdir -p /var/www/html/public/env/
@@ -89,8 +89,7 @@ RUN mkdir -p /var/www/html/public/env/
 RUN chmod -R 0777 /var/www/html/storage/
 #RUN chmod -R 0777 /var/www/html/public/uploads/
 
-ADD run-httpd.sh /run-httpd.sh
-RUN chmod -v +x /run-httpd.sh
+#ADD run-httpd.sh /run-httpd.sh
 EXPOSE 80
 
-CMD ["/run-httpd.sh"]
+CMD ["exec /usr/sbin/httpd -DFOREGROUND"]
