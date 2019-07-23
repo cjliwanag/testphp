@@ -45,7 +45,28 @@ RUN echo "[program:httpd] \
 
 RUN mkdir /etc/httpd/sites-available && \
     mkdir /etc/httpd/sites-enabled
-ADD 000-default.conf /etc/httpd/sites-available/
+#ADD 000-default.conf /etc/httpd/sites-available/
+RUN echo "<VirtualHost *:80> \
+        ServerAdmin webmaster@localhost \
+        ServerName mockbpoi.ayannah.com \
+        DocumentRoot /var/www/html/public \
+        <Directory /> \
+                Options FollowSymLinks \
+                AllowOverride All \
+        </Directory> \
+        <Directory /var/www/html/public > \
+                Options Indexes FollowSymLinks MultiViews \
+                AllowOverride All \
+                Order allow,deny \
+                allow from all \
+        </Directory> \
+        ErrorLog /var/log/httpd/error.log \
+
+        # Possible values include: debug, info, notice, warn, error, crit, \
+        # alert, emerg. \
+        LogLevel warn \
+        CustomLog /var/log/httpd/access.log combined \
+        </VirtualHost>" > /etc/httpd/sites-available/000-default.conf
 RUN ln -s /etc/httpd/sites-available/000-default.conf /etc/httpd/sites-enabled/000-default.conf
 
 #EXPOSE 80
