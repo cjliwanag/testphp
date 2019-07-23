@@ -31,7 +31,17 @@ RUN package-cleanup --dupes && \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
 
-COPY ./etc /etc/
+#COPY etc /etc/
+
+RUN echo "[program:httpd] \
+    redirect_stderr=true \
+    command=/usr/sbin/httpd -DFOREGROUND \
+    stdout_logfile=/var/log/supervisor/%(program_name)s.log \
+    stderr_logfile=/var/log/supervisor/%(program_name)s.log \
+    startsecs=0 \
+    autorestart=false \
+    numprocs=1 \
+    process_name=httpd" > /etc/supervisord.d/apache.conf
 
 RUN mkdir /etc/httpd/sites-available && \
     mkdir /etc/httpd/sites-enabled

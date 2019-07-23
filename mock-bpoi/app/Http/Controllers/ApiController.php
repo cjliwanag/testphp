@@ -36,28 +36,34 @@ class ApiController extends Controller
     		return response()->json($popo);
     	}
 
-    	$popo->bu_code = 'BPOI';
-    	$popo->first_name = 'Mark';
-    	$popo->middle_name = 'Anthony';
-    	$popo->last_name = 'Fernandez';
-    	$popo->date_of_birth = '1980--01--31';
-    	$popo->email = 'mac@thousandminds.com';
-    	$popo->mobile_number = '09171234567';
-    	$popo->secondary_phone_number = '021234567';
-    	$popo->tin = '111-111-102';
-    	$popo->sss = '10-0000001-2';
-    	$popo->nationality = 'Filipino';
-    	$popo->gender = 'Male';
-    	$popo->permanent_address = 'Unit 123, Zeta Building, 1 Salcedo Street, Makati City, Philippines';
-    	$popo->base_monthly_salary = '10000.00';
-    	$popo->net_monthly_salary = '10000.00';
-    	$popo->employment_start_date = '1/1/1900';
-    	$popo->employment_status = 'REGULAR';
-    	$popo->bank_name = 'BPI';
-    	$popo->bank_account_no = '1000000097';
-    	$popo->payday_schedule = '15/30';
-
-    	return response()->json($popo);
+        if($empId == 'USER1537177870965')
+        {
+        	$popo->bu_code = 'BPOI';
+        	$popo->first_name = 'Mark';
+        	$popo->middle_name = 'Anthony';
+        	$popo->last_name = 'Fernandez';
+        	$popo->date_of_birth = '1980--01--31';
+        	$popo->email = 'mac@thousandminds.com';
+        	$popo->mobile_number = '09171234567';
+        	$popo->secondary_phone_number = '021234567';
+        	$popo->tin = '111-111-102';
+        	$popo->sss = '10-0000001-2';
+        	$popo->nationality = 'Filipino';
+        	$popo->gender = 'Male';
+        	$popo->permanent_address = 'Unit 123, Zeta Building, 1 Salcedo Street, Makati City, Philippines';
+        	$popo->base_monthly_salary = '10000.00';
+        	$popo->net_monthly_salary = '10000.00';
+        	$popo->employment_start_date = '1/1/1900';
+        	$popo->employment_status = 'REGULAR';
+        	$popo->bank_name = 'BPI';
+        	$popo->bank_account_no = '1000000097';
+        	$popo->payday_schedule = '15/30';
+            return response()->json($popo);
+        }
+        else
+        {
+            abort(502);
+        }
     }
     public function authenticator(Request $request)
     {
@@ -91,5 +97,14 @@ class ApiController extends Controller
         $decrypted = Crypt::decryptString($encrypted);
 
         return $decrypted;
+    }
+    public function approval(Request $request) 
+    {
+        $popo = new StdClass();
+        $approvalLink = $request->approvalLink;
+        $disapproveLink = $request->disapproveLink;
+        $popo->approvalLink = $approvalLink;
+        $popo->disapproveLink = $disapproveLink;
+        return response()->json($popo);
     }
 }

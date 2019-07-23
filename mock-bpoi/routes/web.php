@@ -14,9 +14,7 @@
 Route::get('/', function () {
     return view('coindrop');
 });
-Route::get('/approval', function () {
-    return view('approval');
-});
+Route::get('/approval', 'ApiController@approval');
 Route::get('/test', function () {
     return view('test');
 });

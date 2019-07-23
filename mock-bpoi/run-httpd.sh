@@ -6,4 +6,4 @@
 rm -rf /run/httpd/* /tmp/httpd*
 
 exec /usr/sbin/httpd -DFOREGROUND
-exec /usr/sbin/sendmail -bd
+# exec /usr/sbin/sendmail -bd
