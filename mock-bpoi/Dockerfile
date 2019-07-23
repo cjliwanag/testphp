@@ -23,7 +23,7 @@ RUN yum -y --setopt=tsflags=nodocs update && \
                                  php71w-pdo \
                                  php71w-gd \
                                  php71w-common \
-                                 php-nette-tokenizer \
+                                 php-nette-tokenizer
 
 RUN package-cleanup --dupes && \
     package-cleanup --cleandupes && \
